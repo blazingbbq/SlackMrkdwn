@@ -10,8 +10,8 @@ module SlackMrkdwn
       .gsub(/^ +/, '\t') # Leading spaces
       .gsub(/^((?:\\t)*?)[\*\+-] (.+)/, '\1- \2') # Unordered lists
       .gsub(/\[(.+?)\]\((.+?)(?: .*?)?\)/, '<\2|\1>') # Classic link TODO: Do not match repository references
-      .gsub(/\[(.+?)\]\[(.+?)\]/) { |m| markdown.match?(/\[#{$2}\]: (.+)/i) ? ("|#{$1}>".prepend(/\[#{$2}\]: (.+)/i.match(markdown) { |n| "<#{$1}" })) : "[#{$1}][#{$2}]" } # Reference style links
-      .gsub(/\[(.+?)\]/) { |m| markdown.match?(/\[#{$1}\]: (.+)/i) ? ("|#{$1}>".prepend(/\[#{$1}\]: (.+)/i.match(markdown) { |n| "<#{$1}" })) : "[#{$1}]" } # Reference style - Text only links
+      .gsub(/\[(.+?)\]\[(.+?)\]/) { |m| markdown.match?(/\[#{$2}\]: (.+)/i) ? ("|#{$1}>".prepend(/\[#{$2}\]: (.+)/i.match(markdown) { |n| "<#{$1}" })) : "[#{$1}][#{$2}]" } # Reference-style links
+      .gsub(/\[(.+?)\]/) { |m| markdown.match?(/\[#{$1}\]: (.+)/i) ? ("|#{$1}>".prepend(/\[#{$1}\]: (.+)/i.match(markdown) { |n| "<#{$1}" })) : "[#{$1}]" } # Reference-style - Text only links
       .gsub(/\^<.+?|.+?>: .+/, '') # Remove link references
       .strip
       # Ordered lists (TODO: Need to properly adjust numbers since they don't matter in markdown, also handle sublists)
@@ -21,6 +21,6 @@ module SlackMrkdwn
       # Things that don't need to be modified:
       # - single line `codeblocks`
       # - Blockquotes
-      # - Links on their own get turned into links by Slack (same as Markdown) (Does not check for leading \t ?)
+      # - Links on their own (get turned into links by Slack)
     end
 end
