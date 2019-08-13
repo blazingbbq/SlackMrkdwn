@@ -1,8 +1,15 @@
 # SlackMrkdwn
 
 [![Build Status](https://travis-ci.com/BlazingBBQ/MarkdownToSlackFormatter.svg?branch=master)](https://travis-ci.com/BlazingBBQ/MarkdownToSlackFormatter)
+[![Gem Version](https://badge.fury.io/rb/slack_mrkdwn.svg)](https://badge.fury.io/rb/slack_mrkdwn)
 
 Converts markdown to Slack's message format 'mrkdwn' (See Slack API docs: https://api.slack.com/docs/message-formatting).
+
+# Installation
+
+Add the gem to your gemfile: `gem 'slack_mrkdwn'`, then run `bundle install`. 
+
+Or install the gem by running: `gem install slack_mrkdwn`.
 
 # Usage
 
