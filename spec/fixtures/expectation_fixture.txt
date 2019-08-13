@@ -54,7 +54,9 @@ But let's throw in a &lt;b&gt;tag&lt;/b&gt;.
 
 <https://www.mozilla.org|I'm a reference-style link>
 <http://slashdot.org|You can use numbers for reference-style link definitions>
+
 [No link reference][2]
+[No link reference]
 
 Or leave it empty and use the <http://www.reddit.com|link text itself>.
 

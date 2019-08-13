@@ -56,7 +56,9 @@ But let's throw in a <b>tag</b>.
 
 [I'm a reference-style link][Arbitrary case-insensitive reference text]
 [You can use numbers for reference-style link definitions][1]
+
 [No link reference][2]
+[No link reference]
 
 Or leave it empty and use the [link text itself].
 
