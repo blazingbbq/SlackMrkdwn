@@ -1,4 +1,5 @@
 # MarkdownToSlackFormatter
+[![Build Status](https://travis-ci.com/BlazingBBQ/MarkdownToSlackFormatter.svg?branch=master)](https://travis-ci.com/BlazingBBQ/MarkdownToSlackFormatter)
 
 Converts markdown to Slack's internal format 'mrkdwn' (See Slack API docs: https://api.slack.com/docs/message-formatting).
 
