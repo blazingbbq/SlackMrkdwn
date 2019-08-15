@@ -32,6 +32,7 @@ It will first encode Slack's restricted characters to HTML entities (`<`, `>` an
 - Codeblocks
 - Indentation
 - Unordered lists
+- Images
 - Links (Classic-style and reference-style)
 
 It will also strip any whitespace on either side once it's done the conversion.
