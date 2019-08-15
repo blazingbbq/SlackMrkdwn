@@ -13,6 +13,8 @@ describe SlackMrkdwn do
     Test.new('converts codeblocks', "```javascript\nconsole.log('Hello, World!')\n```", "```\nconsole.log('Hello, World!')\n```"),
     Test.new('converts leading spaces', '   Aligned text content', '\tAligned text content'),
     Test.new('converts unordered lists', "+ List with plus symbol\n* Or asterisk\n- Or minus symbol\n\\t+ Even indented lists", "- List with plus symbol\n- Or asterisk\n- Or minus symbol\n\\t- Even indented lists"),
+    Test.new('converts image', "![](https://example.com/image.png)", 'https://example.com/image.png'),
+    Test.new('converts image with text', "![ignored](https://example.com/image.png)", 'https://example.com/image.png'),
     Test.new('converts classic-style links', '[Classic-style link](https://www.google.com)', '<https://www.google.com|Classic-style link>'),
     Test.new('converts classic-style links with alt text', '[Classic-style link](https://www.google.com "With alt text")', '<https://www.google.com|Classic-style link>'),
     Test.new('converts reference-style links', "[Reference-style link][2]\n[2]: https://www.google.com", '<https://www.google.com|Reference-style link>'),

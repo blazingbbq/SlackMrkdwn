@@ -44,6 +44,10 @@ But let's throw in a &lt;b&gt;tag&lt;/b&gt;.
 - Or minuses
 - Or pluses
 
+--- Images
+https://example.com/image.png
+https://example.com/image.png
+
 --- Classic style links
 
 <https://www.google.com|I'm an inline-style link>

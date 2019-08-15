@@ -46,6 +46,10 @@ But let's throw in a <b>tag</b>.
 - Or minuses
 + Or pluses
 
+--- Images
+![](https://example.com/image.png)
+![ignored](https://example.com/image.png)
+
 --- Classic style links
 
 [I'm an inline-style link](https://www.google.com)
