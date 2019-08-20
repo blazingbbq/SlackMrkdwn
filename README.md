@@ -19,7 +19,7 @@ require 'SlackMrkdwn'
 slack_formatted_text = SlackMrkdwn.from('My markdown formatted text')
 ```
 
-_Note:_ Requires Ruby version above or equal to v2.4.6 (because it uses `match?`).
+_Note:_ Requires Ruby version above or equal to v1.9.2 (because it uses Redcarpet to render Markdown).
 
 # What is being converted?
 
@@ -30,20 +30,14 @@ It will first encode Slack's restricted characters to HTML entities (`<`, `>` an
 - Strike-through
 - Headings (to bold text)
 - Codeblocks
-- Indentation
+- Single line `codeblocks`
+- Blockquotes
 - Unordered lists
+- Ordered lists
 - Images
 - Links (Classic-style and reference-style)
 
-It will also strip any whitespace on either side once it's done the conversion.
-
-### What isn't converted?
-
-These elements do not need to be converted, either because Slack's style is the same or because Slack handles it by default.
-
-- Single line `codeblocks`
-- Blockquotes
-- Links on their own
+It will also strip any trailing whitespace once it's done the conversion.
 
 # Contributing
 
