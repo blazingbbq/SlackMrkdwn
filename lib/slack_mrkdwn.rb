@@ -2,6 +2,13 @@
 require 'redcarpet'
 
 class SlackMrkdwn < Redcarpet::Render::Base
+  class << self
+    def from(markdown)
+      renderer = SlackMrkdwn.new
+      Redcarpet::Markdown.new(renderer, strikethrough: true, underline: true, fenced_code_blocks: true).render(markdown)
+    end
+  end
+
   # Methods where the first argument is the text content
   [
     # block-level calls
@@ -28,7 +35,7 @@ class SlackMrkdwn < Redcarpet::Render::Base
       args.first
     end
   end
-  
+
   # Encode Slack restricted characters
   def preprocess(content)
     content.gsub('&', '&amp;').gsub('<', '&lt;').gsub('>', '&gt;')
@@ -83,48 +90,78 @@ class SlackMrkdwn < Redcarpet::Render::Base
     "<#{link}|#{content}>"
   end
 
-  # lists
-  def list(entries, list_type)
-    reset_list(list_type)
+  # list. Called when all list items have been consumed
+  def list(entries, style)
+    entries = format_list(entries, style)
+    remember_last_list_entries(entries)
     entries
   end
 
-  def reset_list(list_type)
-    @list_item_count = 0 if list_type == :ordered
-  end
-
-  def list_prefix(list_type)
-    return "-" if list_type == :unordered
-    @list_item_count = 0 unless @list_item_count
-    @list_item_count += 1
-    "#{@list_item_count}."
-  end
-
-  def list_item(entry, list_type)
-    "#{list_prefix(list_type)} #{entry}"
+  # list item
+  def list_item(entry, _style)
+    if @last_entries && entry.end_with?(@last_entries)
+      entry = indent_list_items(entry)
+      @last_entries = nil
+    end
+    entry
   end
 
   # ![](image)
-  def image(link, _title, _alt_text)
+  def image(link, _title, _content)
     link
+  end
+
+  def paragraph(text)
+    clear_last_list_entries
+    "#{text}\n"
+  end
+
+  # # Header
+  def header(text, _header_level)
+    "*#{text}*\n"
   end
 
   def linebreak()
     "\n"
   end
 
-  def paragraph(text)
-    "#{text}\n"
-  end
+  private
 
-  def header(text, _header_level)
-    "*#{text}*\n"
-  end
-
-  class << self
-    def from(markdown)
-      renderer = SlackMrkdwn.new
-      Redcarpet::Markdown.new(renderer, strikethrough: true, underline: true, fenced_code_blocks: true).render(markdown)
+  def format_list(entries, style)
+    case style
+    when :ordered
+      number_list(entries)
+    when :unordered
+      add_dashes(entries)
     end
+  end
+
+  def add_dashes(entries)
+    entries.gsub(/^(\S+.*)$/, '- \1')
+  end
+
+  def number_list(entries)
+    count = 0
+    entries.gsub(/^(\S+.*)$/) do
+      match = Regexp.last_match
+      count += 1
+      "#{count}. #{match[0]}"
+    end
+  end
+
+  def remember_last_list_entries(entries)
+    @last_entries = entries
+  end
+
+  def clear_last_list_entries
+    @last_entries = nil
+  end
+
+  def nest_list_entries(entries)
+    entries.gsub(/^(.+)$/, '   \1')
+  end
+
+  def indent_list_items(entry)
+    entry.gsub(@last_entries, nest_list_entries(@last_entries))
   end
 end
