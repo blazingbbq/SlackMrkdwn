@@ -72,7 +72,7 @@ class SlackMrkdwn < Redcarpet::Render::Base
 
   # ``` code block ```
   def block_code(content, _language)
-    "```\n#{content}```\n"
+    "```\n#{content}```\n\n"
   end
 
   # > quote
@@ -112,8 +112,9 @@ class SlackMrkdwn < Redcarpet::Render::Base
   end
 
   def paragraph(text)
+    pre_spacing = @last_entries ? "\n" : nil
     clear_last_list_entries
-    "#{text}\n"
+    "#{pre_spacing}#{text}\n\n"
   end
 
   # # Header
