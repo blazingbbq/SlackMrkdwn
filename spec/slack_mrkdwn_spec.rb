@@ -6,6 +6,8 @@ describe SlackMrkdwn do
 
   tests = [
     Test.new('encodes Slack\'s restricted characters', '<Restricted&Characters>', '&lt;Restricted&amp;Characters&gt;'),
+    Test.new('removes trailing whitespace', "Hello, World!\n  \n\t\n", 'Hello, World!'),
+
     Test.new('converts emphasis', '*Asterisk* and _underscore_ emphasis', '_Asterisk_ and _underscore_ emphasis'),
     Test.new('converts strong emphasis', '**Asterisk** and __underscore__ strong emphasis', '*Asterisk* and *underscore* strong emphasis'),
     Test.new('converts combined emphasis', 'Combined emphasis with **asterisks and _underscores_**.', 'Combined emphasis with *asterisks and _underscores_*.'),
@@ -21,8 +23,11 @@ describe SlackMrkdwn do
     Test.new('converts reference-style links', "[Reference-style link][2]\n[2]: https://www.google.com", '<https://www.google.com|Reference-style link>'),
     Test.new('converts reference-style, text only links', "[Reference-style link, text only]\n[reference-style link, text only]: https://www.google.com", '<https://www.google.com|Reference-style link, text only>'),
 
-    Test.new('does not convert leading spaces', "   Aligned text content", "   Aligned text content"),
-    Test.new('does not convert paragraphs', 'My paragraph looks the same!', 'My paragraph looks the same!'),
+    Test.new('preserves code spans', 'My `codespan` should be preserved...', 'My `codespan` should be preserved...'),
+    Test.new('preserves leading spaces', "   Aligned text content", "   Aligned text content"),
+    Test.new('preserves paragraphs', 'My paragraph looks the same!', 'My paragraph looks the same!'),
+    Test.new('preserves spacing between paragraphs', "My first paragraph!\n\nFollowed by another paragraph!", "My first paragraph!\n\nFollowed by another paragraph!"),
+    Test.new('preserves spacing between lists and paragraphs', "Description of list:\n\n* List Element\n+ Another list element\n\nFollow up paragraph.", "Description of list:\n\n- List Element\n- Another list element\n\nFollow up paragraph."),
   ]
 
   tests.each do |t|
