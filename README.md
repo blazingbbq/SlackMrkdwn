@@ -48,3 +48,32 @@ To run the test suite, execute:
 ```sh
 rake test
 ```
+
+### Integration tests
+
+The test runner reads integration test fixtures from the `spec/fixtures` directory. To add a new integration test fixture:
+
+- Add the markdown formatted text content in the `spec/fixtures/source` directory
+- Add a corresponding expectation fixture in the `spec/fixtures/expectation` directory
+
+The expectation fixture should have the same name as the source fixture and end with `_expectation`.
+
+The test runner supports a nested file structure for the fixture directories.
+For example, adding the source fixture `spec/fixtures/source/my_org_name/integration_fixture`, would test it against the expectation fixture found in `spec/fixtures/expectation/my_org_name/integration_fixture_expecation`.
+
+Source fixtures that do not have a corresponding expectation fixture will log a test failure.
+
+# Changelog
+
+### 2.2.0
+
+- Fixed paragraph and list spacing
+- Added better integration test support
+
+### 2.1.0
+
+- Added list support
+
+### 2.0.0
+
+- Now using Redcarpet markdown renderer to convert text.

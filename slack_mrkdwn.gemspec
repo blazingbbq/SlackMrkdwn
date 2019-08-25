@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'slack_mrkdwn'
-  s.version     = '2.1.0'
-  s.date        = '2019-08-19'
+  s.version     = '2.2.0'
+  s.date        = '2019-08-25'
   s.summary     = "Convert markdown to Slack's message format 'mrkdwn'."
   s.description = "Convert markdown to Slack's message format 'mrkdwn'."
   s.authors     = ["Simon Cousineau"]
