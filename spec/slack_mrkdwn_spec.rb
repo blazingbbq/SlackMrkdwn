@@ -36,10 +36,20 @@ describe SlackMrkdwn do
     end
   end
 
-  it 'integration test' do
-    markdown_fixture = File.read('spec/fixtures/markdown_fixture.txt')
-    expectation_fixture = File.read('spec/fixtures/expectation_fixture.txt')
+  Dir.glob('spec/fixtures/source/**/*') do |source_file|
+    next if File.directory? source_file
+    
+    it "Integration: #{source_file}" do
+      expectation_file = "#{source_file.gsub(/\/source\/(.*?)$/, '/expectation/\1')}_expectation"
+      
+      begin
+        source = File.read(source_file)
+        expectation = File.read(expectation_file)
+      rescue
+        fail
+      end
 
-    expect(SlackMrkdwn.from(markdown_fixture)).to eq(expectation_fixture)
+      expect(SlackMrkdwn.from(source)).to eq(expectation)
+    end
   end
 end
