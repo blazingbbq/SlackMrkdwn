@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'slack_mrkdwn'
-  s.version     = '2.2.0'
+  s.version     = '2.2.1'
   s.date        = '2019-08-25'
   s.summary     = "Convert markdown to Slack's message format 'mrkdwn'."
   s.description = "Convert markdown to Slack's message format 'mrkdwn'."
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.2'
 
-  s.add_dependency 'redcarpet'
+  s.add_dependency 'redcarpet', '>= 3.5.1'
 
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'rake'
