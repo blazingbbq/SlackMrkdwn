@@ -65,6 +65,9 @@ Source fixtures that do not have a corresponding expectation fixture will log a 
 
 # Changelog
 
+### 2.2.1
+- Bumped RedCarpet version due to security vulnerability in version <3.5.1
+
 ### 2.2.0
 
 - Fixed paragraph and list spacing
