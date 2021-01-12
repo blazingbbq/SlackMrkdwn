@@ -14,7 +14,7 @@ Or install the gem by running: `gem install slack_mrkdwn`.
 # Usage
 
 ```ruby
-require 'SlackMrkdwn'
+require 'slack_mrkdwn'
 
 slack_formatted_text = SlackMrkdwn.from('My markdown formatted text')
 ```
